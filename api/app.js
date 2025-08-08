@@ -40,30 +40,3 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/place", placeRouter);
-app.use("/api/v1/file", fileRouter);
-app.use("/api/v1/booking", bookingRouter);
-app.use((err, req, res, next) => {
-  const response = {
-    headers: req.headers,
-    query: req.query,
-    params: req.params,
-    user: req.user, // Only include user info if it's safe
-    path: req.path,
-    method: req.method,
-    cookies: req.cookies,
-    signedCookies: req.signedCookies,
-    cookie: req.cookie,
-  };
-  const errorStatus = err.status || 500;
-  const errorMessage = err.message || "Something went wrong!";
-  return res.status(errorStatus).json({
-    response: response,
-    success: false,
-    status: errorStatus,
-    message: errorMessage,
-  });
-});
-
-module.exports = app;
