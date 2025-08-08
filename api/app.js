@@ -40,3 +40,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
+app.use("/api/v1/user", userRouter);
+
+
+module.exports = app;
